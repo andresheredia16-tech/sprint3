@@ -20,6 +20,18 @@ export const validarSuperheroe = [
         .trim()
         .notEmpty().withMessage('La edad es requerida').bail()
         .isNumeric().withMessage('La edad debe ser un número').bail()
-        .custom(value => value >= 0).withMessage('La edad no puede ser un número negativo')
+        .custom(value => value >= 0).withMessage('La edad no puede ser un número negativo'),
+    
+    // Reglas para poderes
+    // 1. Validar el arreglo
+    body('poderes')
+        .isArray({ min: 1 }).withMessage('Los poderes deben ser un arreglo y contener al menos un elemento').bail(),
+
+    // 2. Validar el contenido del arreglo
+    body('poderes.*')
+        .trim()
+        .isString().withMessage('Cada poder debe ser texto').bail()
+        .isLength({ min: 3 }).withMessage('Cada poder debe tener al menos 3 caracteres')
+        .isLength({ max: 60 }).withMessage('Ningún poder puede exceder los 60 caracteres')
 
 ];
