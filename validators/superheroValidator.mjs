@@ -10,7 +10,7 @@ export const validarSuperheroe = [
 
     // Reglas para nombreReal
     body('nombreReal')
-        .trim()
+        .trim() 
         .notEmpty().withMessage('El nombre real es requerido').bail()
         .isLength({ min: 3 }).withMessage('El nombre real debe tener al menos 3 caracteres').bail()
         .isLength({ max: 60 }).withMessage('El nombre real no puede exceder los 60 caracteres'),
@@ -25,6 +25,13 @@ export const validarSuperheroe = [
     // Reglas para poderes
     // 1. Validar el arreglo
     body('poderes')
+        .customSanitizer(value => {
+            if (typeof value === 'string') {
+                return value.split(',').map(p => p.trim());
+            }
+            return value;
+        })
+
         .isArray({ min: 1 }).withMessage('Los poderes deben ser un arreglo y contener al menos un elemento').bail(),
 
     // 2. Validar el contenido del arreglo
@@ -32,6 +39,24 @@ export const validarSuperheroe = [
         .trim()
         .isString().withMessage('Cada poder debe ser texto').bail()
         .isLength({ min: 3 }).withMessage('Cada poder debe tener al menos 3 caracteres')
-        .isLength({ max: 60 }).withMessage('Ningún poder puede exceder los 60 caracteres')
+        .isLength({ max: 60 }).withMessage('Ningún poder puede exceder los 60 caracteres'),
+    
+    body('aliados')
+        .customSanitizer(value => {
+            if (typeof value === 'string') {
+                // Separamos por comas y limpiamos espacios vacíos
+                return value.split(',').map(a => a.trim());
+            }
+            return value;
+        }),
 
+    // Reglas para enemigos
+    body('enemigos')
+        .customSanitizer(value => {
+            if (typeof value === 'string') {
+                // Separamos por comas y limpiamos espacios vacíos
+                return value.split(',').map(e => e.trim());
+            }
+            return value;
+        })
 ];

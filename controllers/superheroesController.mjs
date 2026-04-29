@@ -24,9 +24,11 @@ export async function obtenerSuperheroePorIdController(req, res) {
 export async function obtenerTodosLosSuperheroesController(req, res) {
     try {
         const superheroes = await obtenerTodosLosSuperheroes();
-
+        /*
         const superheroesFormateados = renderizarListaSuperheroes(superheroes);
-        res.status(200).json(superheroesFormateados);
+        res.status(200).json(superheroesFormateados);*/
+        res.render('dashboard', { superheroes });
+
     } catch (error) {
         res.status(500).send({
             mensaje: 'Error al obtener los superhéroes',
@@ -74,10 +76,11 @@ export async function crearSuperheroeController(req, res) {
     try {
         const nuevoHeroe = await crearSuperheroe(req.body);
         const heroeFormateado = renderizarSuperheroe(nuevoHeroe);
+        // Responde con JSON
         res.status(201).json(heroeFormateado);
     } catch (error) {
         res.status(500).send({ 
-            mensaje: 'Error al crear el superhéroe', 
+            mensaje: 'Error al crear el superhéroe en la API', 
             error: error.message 
         });
     }
@@ -126,5 +129,19 @@ export async function borrarSuperheroePorNombreController(req, res) {
         res.status(200).json(renderizarSuperheroe(superheroe));
     } catch (error) {
         res.status(500).send({ mensaje: 'Error al borrar el superhéroe', error: error.message });
+    }
+}
+
+export async function agregarSuperheroeController(req, res) {
+    try {
+        const datos = req.body;
+        await crearSuperheroe(datos);
+        // Responde redirigiendo la página al dashboard
+        return res.redirect('/api/heroes');
+    } catch (error) {
+        res.status(500).send({ 
+            mensaje: 'Error al agregar el superhéroe desde la web', 
+            error: error.message 
+        });
     }
 }

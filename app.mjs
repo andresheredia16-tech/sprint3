@@ -5,8 +5,12 @@ import superHeroRoutes from './routes/superHeroRoutes.mjs';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para parsear JSON
+// Configuración del motor de vistas EJS
+app.set('view engine', 'ejs');
+
+// Middleware 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Conexión a MongoDB
 connectDB();

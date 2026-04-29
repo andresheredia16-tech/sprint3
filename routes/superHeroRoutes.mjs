@@ -6,10 +6,17 @@ import {
 obtenerSuperheroePorIdController,
 obtenerTodosLosSuperheroesController,
 buscarSuperheroesPorAtributoController,
-obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroePorIdController, borrarSuperheroePorNombreController
+obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroePorIdController, borrarSuperheroePorNombreController, agregarSuperheroeController
 } from '../controllers/superheroesController.mjs';
 
 const router = express.Router();
+
+// 1. Ruta para MOSTRAR el formulario
+router.get('/nuevo', (req, res) => {
+    res.render('addSuperhero');
+});
+// 2. Ruta para PROCESAR el formulario
+router.post('/agregar', validarSuperheroe, handleValidationErrors, agregarSuperheroeController);
 
 router.get('/', obtenerTodosLosSuperheroesController);
 router.get('/mayores-30', obtenerSuperheroesMayoresDe30Controller);
