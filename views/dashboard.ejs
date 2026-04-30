@@ -77,12 +77,24 @@
         .btn-editar:hover {
             background-color: #e67e22;
         }
+        /* Estilos para el botón de agregar */
+        .btn-agregar { 
+            background-color: #27ae60; 
+            color: white; 
+            text-decoration: none; 
+            padding: 10px 15px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            display: inline-block; 
+            margin-bottom: 20px; 
+        }
+        .btn-agregar:hover { background-color: #2ecc71; }
     </style>
 </head>
 
 <body>
     <h1>Lista de Superhéroes</h1>
-
+    <a href="/api/heroes/nuevo" class="btn-agregar">+ Agregar Nuevo Superhéroe</a>
     <table>
         <thead>
             <tr>
