@@ -6,7 +6,7 @@ import {
 obtenerSuperheroePorIdController,
 obtenerTodosLosSuperheroesController,
 buscarSuperheroesPorAtributoController,
-obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroePorIdController, borrarSuperheroePorNombreController, agregarSuperheroeController
+obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroePorIdController, borrarSuperheroePorNombreController, agregarSuperheroeController, mostrarFormularioEdicionController, editarSuperheroeController
 } from '../controllers/superheroesController.mjs';
 
 const router = express.Router();
@@ -20,10 +20,12 @@ router.post('/agregar', validarSuperheroe, handleValidationErrors, agregarSuperh
 
 router.get('/', obtenerTodosLosSuperheroesController);
 router.get('/mayores-30', obtenerSuperheroesMayoresDe30Controller);
+router.get('/:id/editar', mostrarFormularioEdicionController);
 router.get('/buscar/:atributo/:valor', buscarSuperheroesPorAtributoController);
 router.get('/:id', obtenerSuperheroePorIdController);
 
 router.post('/', validarSuperheroe, handleValidationErrors, crearSuperheroeController);
+router.put('/:id/editar', validarSuperheroe, handleValidationErrors, editarSuperheroeController);
 router.put('/:id', actualizarSuperheroeController);
 router.delete('/nombre/:nombre', borrarSuperheroePorNombreController);
 router.delete('/:id', borrarSuperheroePorIdController);

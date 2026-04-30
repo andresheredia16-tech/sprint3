@@ -145,3 +145,34 @@ export async function agregarSuperheroeController(req, res) {
         });
     }
 }
+
+// 1. Mostrar el formulario con los datos precargados
+export async function mostrarFormularioEdicionController(req, res) {
+    try {
+        const { id } = req.params;
+        const heroe = await obtenerSuperheroePorId(id);
+        
+        if (!heroe) {
+            return res.status(404).send('Superhéroe no encontrado');
+        }
+        
+        res.render('editSuperhero', { heroe });
+    } catch (error) {
+        res.status(500).send({ mensaje: 'Error al obtener el superhéroe para editar', error: error.message });
+    }
+}
+
+// 2. Procesar la edición y redirigir
+export async function editarSuperheroeController(req, res) {
+    try {
+        const { id } = req.params;
+        const datosActualizados = req.body;
+        
+        await actualizarSuperheroe(id, datosActualizados);
+        
+        // Volvemos al dashboard tras actualizar
+        return res.redirect('/api/heroes');
+    } catch (error) {
+        res.status(500).send({ mensaje: 'Error al editar el superhéroe', error: error.message });
+    }
+}

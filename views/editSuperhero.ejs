@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Superhéroe</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background-color: #f0f2f5; }
+        .form-container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #f39c12; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; }
+        button:hover { background-color: #e67e22; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Editar: <%= heroe.nombreSuperHeroe %></h1>
+        <form action="/api/heroes/<%= heroe._id %>/editar?_method=PUT" method="POST">
+            <div class="form-group">
+                <label>Nombre de Superhéroe:</label>
+                <input type="text" name="nombreSuperHeroe" value="<%= heroe.nombreSuperHeroe %>" required>
+            </div>
+            <div class="form-group">
+                <label>Nombre Real:</label>
+                <input type="text" name="nombreReal" value="<%= heroe.nombreReal %>" required>
+            </div>
+            <div class="form-group">
+                <label>Edad:</label>
+                <input type="number" name="edad" value="<%= heroe.edad %>" required>
+            </div>
+            <div class="form-group">
+                <label>Planeta de Origen:</label>
+                <input type="text" name="planetaOrigen" value="<%= heroe.planetaOrigen %>">
+            </div>
+            <div class="form-group">
+                <label>Poderes (separados por comas):</label>
+                <input type="text" name="poderes" value="<%= heroe.poderes.join(', ') %>">
+            </div>
+            <div class="form-group">
+                <label>Aliados (separados por comas):</label>
+                <input type="text" name="aliados" value="<%= heroe.aliados.join(', ') %>">
+            </div>
+            <div class="form-group">
+                <label>Enemigos (separados por comas):</label>
+                <input type="text" name="enemigos" value="<%= heroe.enemigos.join(', ') %>">
+            </div>
+            <button type="submit">Actualizar Superhéroe</button>
+        </form>
+        <p><a href="/api/heroes">Cancelar y volver al Dashboard</a></p>
+    </div>
+</body>
+</html>

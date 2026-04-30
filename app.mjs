@@ -1,6 +1,7 @@
 import express from 'express';
 import { connectDB } from './config/dbConfig.mjs';
 import superHeroRoutes from './routes/superHeroRoutes.mjs';
+import methodOverride from 'method-override';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ app.set('view engine', 'ejs');
 // Middleware 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 // Conexión a MongoDB
 connectDB();

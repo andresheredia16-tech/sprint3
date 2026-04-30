@@ -1,26 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Dashboard de Superhéroes</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; background-color: #f0f2f5; }
-        h1 { color: #333; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; }
-        th { background-color: #2c3e50; color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
         /* Estilos para las etiquetas de los arreglos */
-        .tag { border-radius: 4px; padding: 3px 8px; margin: 2px; display: inline-block; font-size: 12px; color: white; }
-        .poder-tag { background: #7f8c8d; }   /* Gris */
-        .aliado-tag { background: #27ae60; }  /* Verde */
-        .enemigo-tag { background: #c0392b; } /* Rojo */
+        .tag {
+            border-radius: 4px;
+            padding: 3px 8px;
+            margin: 2px;
+            display: inline-block;
+            font-size: 12px;
+            color: white;
+        }
+
+        .poder-tag {
+            background: #7f8c8d;
+        }
+
+        /* Gris */
+        .aliado-tag {
+            background: #27ae60;
+        }
+
+        /* Verde */
+        .enemigo-tag {
+            background: #c0392b;
+        }
+
+        /* Rojo */
+        .btn-editar {
+            background-color: #f39c12;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .btn-editar:hover {
+            background-color: #e67e22;
+        }
     </style>
 </head>
+
 <body>
     <h1>Lista de Superhéroes</h1>
-    
+
     <table>
         <thead>
             <tr>
@@ -32,38 +94,59 @@
                 <th>Aliados</th>
                 <th>Enemigos</th>
                 <th>Creador</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <% superheroes.forEach(heroe => { %>
+            <% superheroes.forEach(heroe=> { %>
                 <tr>
-                    <td><strong><%= heroe.nombreSuperHeroe %></strong></td>
-                    <td><%= heroe.nombreReal %></td>
-                    <td><%= heroe.edad %> años</td>
-                    <td><%= heroe.planetaOrigen %></td>
-                    
+                    <td><strong>
+                            <%= heroe.nombreSuperHeroe %>
+                        </strong></td>
                     <td>
-                        <% heroe.poderes.forEach(poder => { %>
-                            <span class="tag poder-tag"><%= poder %></span>
-                        <% }); %>
+                        <%= heroe.nombreReal %>
+                    </td>
+                    <td>
+                        <%= heroe.edad %> años
+                    </td>
+                    <td>
+                        <%= heroe.planetaOrigen %>
                     </td>
 
                     <td>
-                        <% heroe.aliados.forEach(aliado => { %>
-                            <span class="tag aliado-tag"><%= aliado %></span>
-                        <% }); %>
+                        <% heroe.poderes.forEach(poder=> { %>
+                            <span class="tag poder-tag">
+                                <%= poder %>
+                            </span>
+                            <% }); %>
                     </td>
 
                     <td>
-                        <% heroe.enemigos.forEach(enemigo => { %>
-                            <span class="tag enemigo-tag"><%= enemigo %></span>
-                        <% }); %>
+                        <% heroe.aliados.forEach(aliado=> { %>
+                            <span class="tag aliado-tag">
+                                <%= aliado %>
+                            </span>
+                            <% }); %>
                     </td>
 
-                    <td><%= heroe.creador %></td>
+                    <td>
+                        <% heroe.enemigos.forEach(enemigo=> { %>
+                            <span class="tag enemigo-tag">
+                                <%= enemigo %>
+                            </span>
+                            <% }); %>
+                    </td>
+
+                    <td>
+                        <%= heroe.creador %>
+                    </td>
+                    <td>
+                        <a href="/api/heroes/<%= heroe._id %>/editar" class="btn-editar">Editar</a>
+                    </td>
                 </tr>
-            <% }); %>
+                <% }); %>
         </tbody>
     </table>
 </body>
+
 </html>
