@@ -89,6 +89,17 @@
             margin-bottom: 20px; 
         }
         .btn-agregar:hover { background-color: #2ecc71; }
+        .btn-eliminar { 
+            background-color: #e74c3c; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            font-size: 13px; 
+            cursor: pointer; 
+            margin-left: 5px;
+        }
+        .btn-eliminar:hover { background-color: #c0392b; }
     </style>
 </head>
 
@@ -154,6 +165,15 @@
                     </td>
                     <td>
                         <a href="/api/heroes/<%= heroe._id %>/editar" class="btn-editar">Editar</a>
+
+                        <form 
+                            action="/api/heroes/<%= heroe._id %>?_method=DELETE" 
+                            method="POST" 
+                            style="display:inline;" 
+                            onsubmit="return confirm('¿Estás seguro de que deseas eliminar a <%= heroe.nombreSuperHeroe %>? Esta acción es irreversible.');"
+                        >
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
                 <% }); %>

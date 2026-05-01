@@ -176,3 +176,21 @@ export async function editarSuperheroeController(req, res) {
         res.status(500).send({ mensaje: 'Error al editar el superhéroe', error: error.message });
     }
 }
+
+// Controlador para ELIMINAR desde la Web
+export async function eliminarSuperheroeController(req, res) {
+    try {
+        const { id } = req.params;
+        
+        // Llamamos al servicio para que borre el documento en MongoDB
+        await borrarSuperheroePorId(id);
+        
+        // Redirigimos al dashboard para ver la lista actualizada
+        return res.redirect('/api/heroes');
+    } catch (error) {
+        res.status(500).send({ 
+            mensaje: 'Error al eliminar el superhéroe desde la web', 
+            error: error.message 
+        });
+    }
+}

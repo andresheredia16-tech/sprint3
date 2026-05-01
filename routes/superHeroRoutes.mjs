@@ -6,7 +6,7 @@ import {
 obtenerSuperheroePorIdController,
 obtenerTodosLosSuperheroesController,
 buscarSuperheroesPorAtributoController,
-obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroePorIdController, borrarSuperheroePorNombreController, agregarSuperheroeController, mostrarFormularioEdicionController, editarSuperheroeController
+obtenerSuperheroesMayoresDe30Controller, crearSuperheroeController, actualizarSuperheroeController, borrarSuperheroePorIdController, borrarSuperheroePorNombreController, agregarSuperheroeController, mostrarFormularioEdicionController, editarSuperheroeController, eliminarSuperheroeController
 } from '../controllers/superheroesController.mjs';
 
 const router = express.Router();
@@ -28,6 +28,6 @@ router.post('/', validarSuperheroe, handleValidationErrors, crearSuperheroeContr
 router.put('/:id/editar', validarSuperheroe, handleValidationErrors, editarSuperheroeController);
 router.put('/:id', actualizarSuperheroeController);
 router.delete('/nombre/:nombre', borrarSuperheroePorNombreController);
-router.delete('/:id', borrarSuperheroePorIdController);
+router.delete('/:id', eliminarSuperheroeController);
 
 export default router;
